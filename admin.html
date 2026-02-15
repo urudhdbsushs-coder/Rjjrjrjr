@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Webapp Sikho</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; }
+        .admin-card {
+            background: white;
+            border-radius: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .admin-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background-color: #fdfdfd;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            outline: none;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+        .input-field:focus {
+            border-color: #4f46e5;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.05);
+        }
+        .btn-indigo {
+            background-color: #4f46e5;
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        .btn-indigo:hover {
+            background-color: #4338ca;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.3);
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6 bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm">
+            <div class="flex items-center gap-5">
+                <div class="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-indigo-100">
+                    <i class="fas fa-shield-cat text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-black text-slate-900 leading-none">Admin Control</h1>
+                    <p class="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mt-2">Management Workspace</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <a href="index.html" class="px-6 py-3 bg-slate-50 text-slate-600 rounded-xl font-bold text-sm hover:bg-slate-100 transition-all border border-slate-200 flex items-center gap-2">
+                    <i class="fas fa-external-link-alt"></i> Public Site
+                </a>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- Sidebar: Config & Ads -->
+            <div class="lg:col-span-4 space-y-10">
+                <section class="admin-card p-8">
+                    <h2 class="text-xl font-black text-slate-900 mb-8 flex items-center gap-3">
+                        <i class="fas fa-sliders-h text-indigo-500"></i> Platform Config
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Unlock Timer (Sec)</label>
+                            <input type="number" id="timer-duration-setting" value="10" min="0" class="input-field">
+                        </div>
+                        <button id="save-settings-btn" class="btn-indigo w-full">
+                            Update Settings
+                        </button>
+                    </div>
+                </section>
+
+                <section class="admin-card p-8">
+                    <h2 class="text-xl font-black text-slate-900 mb-8 flex items-center gap-3">
+                        <i class="fas fa-bullhorn text-indigo-500"></i> Advertising
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Slot 1 (Header)</label>
+                            <textarea id="ad-slot-1" rows="3" class="input-field font-mono text-xs" placeholder="Paste script..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Slot 2 (Middle)</label>
+                            <textarea id="ad-slot-2" rows="3" class="input-field font-mono text-xs" placeholder="Paste script..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Slot 3 (Footer)</label>
+                            <textarea id="ad-slot-3" rows="3" class="input-field font-mono text-xs" placeholder="Paste script..."></textarea>
+                        </div>
+                        <button id="save-ads-btn" class="btn-indigo w-full bg-slate-900 hover:bg-black">
+                            Save Ad Scripts
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Main: Content Management -->
+            <div class="lg:col-span-8 space-y-10">
+                <section class="admin-card p-8">
+                    <h2 class="text-xl font-black text-slate-900 mb-8 flex items-center gap-3">
+                        <i class="fas fa-file-upload text-indigo-500"></i> Post New Resource
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <input type="text" id="file-title" placeholder="Resource Title" class="input-field">
+                        <input type="text" id="file-category" placeholder="Category (e.g. Android, Template)" class="input-field">
+                        <input type="number" id="file-ad-count" placeholder="Ads to Unlock" value="5" class="input-field">
+                        <div class="flex items-center gap-4 px-4 bg-slate-50 rounded-2xl border border-slate-100">
+                            <input type="checkbox" id="file-is-hot" class="w-5 h-5 accent-indigo-600 rounded-md">
+                            <label for="file-is-hot" class="text-sm font-bold text-slate-600 uppercase tracking-tighter">Feature as "HOT"</label>
+                        </div>
+                    </div>
+                    <div class="space-y-6 mb-8">
+                        <input type="url" id="file-thumbnail-url" placeholder="Thumbnail Image Direct Link" class="input-field">
+                        <textarea id="file-description" placeholder="Describe this resource briefly..." class="input-field h-24"></textarea>
+                        <input type="url" id="file-download-url" placeholder="Actual File/Download Link" class="input-field">
+                    </div>
+                    <button id="add-file-btn" class="btn-indigo w-full py-5 text-sm">
+                        Publish Resource Now
+                    </button>
+                </section>
+
+                <section class="admin-card p-8">
+                    <div class="flex justify-between items-center mb-8">
+                        <h2 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                            <i class="fas fa-box-open text-indigo-500"></i> Managed Resources
+                        </h2>
+                    </div>
+                    <div id="file-list" class="space-y-4">
+                        <!-- Items list -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-file-modal" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+        <div class="bg-white p-10 rounded-[2.5rem] w-full max-w-2xl border border-white/20 shadow-2xl">
+            <h3 class="text-2xl font-black text-slate-900 mb-8">Modify Resource</h3>
+            <div class="space-y-5">
+                <input type="hidden" id="edit-file-id">
+                <div class="grid grid-cols-2 gap-5">
+                    <input type="text" id="edit-file-title" class="input-field" placeholder="Title">
+                    <input type="text" id="edit-file-category" class="input-field" placeholder="Category">
+                    <input type="number" id="edit-file-ad-count" class="input-field" placeholder="Ads">
+                    <div class="flex items-center gap-4 px-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <input type="checkbox" id="edit-file-is-hot" class="w-5 h-5 accent-indigo-600">
+                        <label class="text-xs font-bold text-slate-600">HOT</label>
+                    </div>
+                </div>
+                <input type="url" id="edit-file-thumbnail-url" class="input-field" placeholder="Thumbnail">
+                <textarea id="edit-file-description" class="input-field h-24" placeholder="Description"></textarea>
+                <input type="url" id="edit-file-download-url" class="input-field" placeholder="Link">
+                
+                <div class="flex justify-end gap-4 mt-10">
+                    <button id="cancel-edit-btn" class="px-8 py-3.5 bg-slate-100 text-slate-600 rounded-2xl font-black uppercase text-[10px] hover:bg-slate-200">Close</button>
+                    <button id="save-edit-btn" class="px-8 py-3.5 bg-indigo-600 text-white rounded-2xl font-black uppercase text-[10px] hover:bg-indigo-700 shadow-lg shadow-indigo-200">Update Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-10 right-10 text-white py-4 px-8 rounded-2xl shadow-2xl opacity-0 transition-all duration-300 z-[200] font-black text-xs uppercase tracking-widest transform translate-y-4">
+        <span id="toast-message"></span>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, serverTimestamp, query, orderBy, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAnaGdTdQt1ED6XQU4LBmPx4NvbyMVR11w",
+            authDomain: "admin-c1d25.firebaseapp.com",
+            projectId: "admin-c1d25",
+            storageBucket: "admin-c1d25.firebasestorage.app",
+            messagingSenderId: "516508991759",
+            appId: "1:516508991759:web:76d72c8a8984bcfb037e7a",
+            measurementId: "G-MGB1SLJFN5"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const fileList = document.getElementById('file-list');
+        const editModal = document.getElementById('edit-file-modal');
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.className = `fixed bottom-10 right-10 text-white py-4 px-8 rounded-2xl shadow-2xl transition-all duration-300 z-[200] font-black text-xs uppercase tracking-widest ${type === 'success' ? 'bg-indigo-600' : 'bg-rose-500'}`;
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            setTimeout(() => toast.classList.add('opacity-0', 'translate-y-4'), 3000);
+        }
+
+        async function handleAction(btn, action) {
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i>`;
+            try {
+                await action();
+                btn.innerHTML = `<i class="fas fa-check"></i>`;
+            } catch (e) {
+                console.error(e);
+                showToast("Error occurred", "error");
+                btn.innerHTML = original;
+            } finally {
+                setTimeout(() => { btn.innerHTML = original; btn.disabled = false; }, 1500);
+            }
+        }
+
+        async function loadData() {
+            const genSnap = await getDoc(doc(db, "settings", "general"));
+            if(genSnap.exists()) document.getElementById('timer-duration-setting').value = genSnap.data().timerDuration;
+
+            const adSnap = await getDoc(doc(db, "settings", "ads"));
+            if(adSnap.exists()) {
+                const data = adSnap.data();
+                document.getElementById('ad-slot-1').value = data.adSlot1 || '';
+                document.getElementById('ad-slot-2').value = data.adSlot2 || '';
+                document.getElementById('ad-slot-3').value = data.adSlot3 || '';
+            }
+            loadFiles();
+        }
+
+        document.getElementById('save-settings-btn').onclick = (e) => handleAction(e.target, async () => {
+            await setDoc(doc(db, "settings", "general"), { timerDuration: parseInt(document.getElementById('timer-duration-setting').value) });
+            showToast("Settings Updated");
+        });
+
+        document.getElementById('save-ads-btn').onclick = (e) => handleAction(e.target, async () => {
+            await setDoc(doc(db, "settings", "ads"), {
+                adSlot1: document.getElementById('ad-slot-1').value,
+                adSlot2: document.getElementById('ad-slot-2').value,
+                adSlot3: document.getElementById('ad-slot-3').value,
+            });
+            showToast("Ads Updated");
+        });
+
+        async function loadFiles() {
+            const q = query(collection(db, "files"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            fileList.innerHTML = '';
+            snap.forEach(d => {
+                const f = d.data();
+                const div = document.createElement('div');
+                div.className = 'flex items-center gap-5 p-4 bg-slate-50 border border-slate-100 rounded-2xl group transition-all hover:bg-white hover:shadow-lg';
+                div.innerHTML = `
+                    <img src="${f.thumbnailUrl}" class="w-16 h-16 object-cover rounded-xl border border-slate-200">
+                    <div class="flex-grow min-w-0">
+                        <div class="flex items-center gap-2 mb-1">
+                            <h4 class="font-black text-slate-900 truncate text-sm">${f.title}</h4>
+                            ${f.isHot ? '<span class="bg-rose-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded">HOT</span>' : ''}
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-[9px] font-black text-slate-400 uppercase tracking-tighter"><i class="fas fa-tag"></i> ${f.category || 'General'}</span>
+                            <span class="text-[9px] font-black text-slate-400 uppercase tracking-tighter"><i class="fas fa-bolt"></i> ${f.requiredAds} Ads</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button data-id="${d.id}" class="edit-file w-10 h-10 bg-white text-slate-400 hover:text-indigo-600 rounded-xl transition-all shadow-sm border border-slate-200">
+                            <i class="fas fa-pencil-alt text-xs"></i>
+                        </button>
+                        <button data-id="${d.id}" class="delete-file w-10 h-10 bg-white text-slate-400 hover:text-rose-600 rounded-xl transition-all shadow-sm border border-slate-200">
+                            <i class="fas fa-trash-alt text-xs"></i>
+                        </button>
+                    </div>
+                `;
+                fileList.appendChild(div);
+            });
+        }
+
+        document.getElementById('add-file-btn').onclick = (e) => handleAction(e.target, async () => {
+            const data = {
+                title: document.getElementById('file-title').value,
+                category: document.getElementById('file-category').value,
+                requiredAds: parseInt(document.getElementById('file-ad-count').value),
+                isHot: document.getElementById('file-is-hot').checked,
+                thumbnailUrl: document.getElementById('file-thumbnail-url').value,
+                description: document.getElementById('file-description').value,
+                downloadUrl: document.getElementById('file-download-url').value,
+                createdAt: serverTimestamp()
+            };
+            if(!data.title || !data.downloadUrl) return showToast("Required data missing", "error");
+            await addDoc(collection(db, "files"), data);
+            ['file-title', 'file-category', 'file-thumbnail-url', 'file-description', 'file-download-url'].forEach(id => document.getElementById(id).value = '');
+            loadFiles();
+            showToast("Resource Published");
+        });
+
+        fileList.onclick = async (e) => {
+            const delBtn = e.target.closest('.delete-file');
+            const editBtn = e.target.closest('.edit-file');
+            
+            if(delBtn && confirm("Confirm permanent delete?")) {
+                await deleteDoc(doc(db, "files", delBtn.dataset.id));
+                loadFiles();
+                showToast("Deleted");
+            } else if(editBtn) {
+                const snap = await getDoc(doc(db, "files", editBtn.dataset.id));
+                if(snap.exists()) {
+                    const f = snap.data();
+                    document.getElementById('edit-file-id').value = snap.id;
+                    document.getElementById('edit-file-title').value = f.title;
+                    document.getElementById('edit-file-category').value = f.category || '';
+                    document.getElementById('edit-file-ad-count').value = f.requiredAds;
+                    document.getElementById('edit-file-is-hot').checked = f.isHot || false;
+                    document.getElementById('edit-file-thumbnail-url').value = f.thumbnailUrl;
+                    document.getElementById('edit-file-description').value = f.description;
+                    document.getElementById('edit-file-download-url').value = f.downloadUrl;
+                    editModal.classList.remove('hidden');
+                }
+            }
+        };
+
+        document.getElementById('cancel-edit-btn').onclick = () => editModal.classList.add('hidden');
+
+        document.getElementById('save-edit-btn').onclick = (e) => handleAction(e.target, async () => {
+            const id = document.getElementById('edit-file-id').value;
+            const data = {
+                title: document.getElementById('edit-file-title').value,
+                category: document.getElementById('edit-file-category').value,
+                requiredAds: parseInt(document.getElementById('edit-file-ad-count').value),
+                isHot: document.getElementById('edit-file-is-hot').checked,
+                thumbnailUrl: document.getElementById('edit-file-thumbnail-url').value,
+                description: document.getElementById('edit-file-description').value,
+                downloadUrl: document.getElementById('edit-file-download-url').value
+            };
+            await updateDoc(doc(db, "files", id), data);
+            editModal.classList.add('hidden');
+            loadFiles();
+            showToast("Updated");
+        });
+
+        loadData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+{
+  "name": "Webapp Sikho - File Downloader",
+  "description": "A feature-rich file downloading platform where users can unlock files by viewing ads. Supports multi-language (EN, HI, BN) and real-time Firebase integration.",
+  "requestFramePermissions": []
+}
